@@ -1,5 +1,5 @@
 import argparse, logging
-from feature_evaluation import runMain
+from features_single import runMain
 
 if __name__=="__main__":
     # Initialize the logger
@@ -20,6 +20,10 @@ if __name__=="__main__":
                         help='Boolean to save output file as csv. Default is lz4.', required=False)
     parser.add_argument('--combineLabels', dest='combineLabels', type=str, default="false",
                         help='Boolean to calculate number of bins for histogram by combining GT and Predicted Labels. Default is using GT labels only.', required=False)
+    parser.add_argument('--filePattern', dest='filePattern', type=str, default=".*",
+                        help='Filename pattern to filter data.', required=False)
+    parser.add_argument('--singleCSV', dest='singleCSV', type=str, default="true",
+                        help='Boolean to save output file as a single csv. Default is true.', required=False)
     # Output arguments                    
     parser.add_argument('--outDir', dest='outDir', type=str,
                         help='Output collection', required=True)
@@ -34,8 +38,12 @@ if __name__=="__main__":
     logger.info('outFileFormat = {}'.format(outFileFormat))
     combineLabels = args.combineLabels == 'true' or args.combineLabels == 'True'
     logger.info('combineLabels = {}'.format(combineLabels))
+    filePattern = args.filePattern
+    logger.info('filePattern = {}'.format(filePattern))
+    singleCSV = args.singleCSV == 'true' or args.singleCSV == 'True'
+    logger.info('combineLabels = {}'.format(singleCSV))
     
     outDir = args.outDir
     logger.info('outDir = {}'.format(outDir))
 
-    runMain(GTDir, PredDir, outFileFormat, combineLabels, outDir)
+    runMain(GTDir, PredDir, outFileFormat, combineLabels, filePattern, singleCSV, outDir)

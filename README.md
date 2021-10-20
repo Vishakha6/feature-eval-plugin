@@ -23,4 +23,6 @@ This plugin takes four input arguments and one output argument:
 | `--PredDir` | Predicted feature collection to be processed by this plugin. | Input | csvCollection |
 | `--combineLabels` | Boolean to calculate number of bins for histogram by combining GT and Predicted Labels. Default is using GT labels only. | Input | boolean |
 | `--outFileFormat` | Boolean to save output file as csv. Default is lz4. | Input | boolean |
+| `--singleCSV` | Boolean to save output file as a single csv. Default is true. | Input | boolean |
+| `--filePattern` | Filename pattern to filter data. | Input | string |
 | `--outDir` | Output collection | Output | genericData |
