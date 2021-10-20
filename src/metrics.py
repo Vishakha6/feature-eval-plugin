@@ -1,3 +1,5 @@
+## Source: https://gist.github.com/bshishov/5dc237f59f019b26145648e2124ca1c9
+
 import numpy as np
 
 EPSILON = 1e-10
