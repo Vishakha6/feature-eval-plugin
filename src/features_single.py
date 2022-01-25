@@ -137,7 +137,7 @@ def comparison(expected_array, actual_array, combine, bin_count):
 
 	wd_value = ws_d(cdf1, cdf2)
 
-	p_value = ks_test(cdf1, cdf2)
+	p_value = ks_test(cdf1, cdf2)  ### Ignore this value.
 
 	return(hist_intersect(pdf1, pdf2),correlation(pdf1, pdf2), chi_square(pdf1, pdf2), bhattacharya(pdf1, pdf2), \
 		l1(pdf1, pdf2),l2(pdf1, pdf2), linfinity(pdf1, pdf2),cosine_d(pdf1, pdf2),canberra(pdf1, pdf2),ks_divergence(cdf1, cdf2),match(cdf1, cdf2),cvm(cdf1, cdf2),\
