@@ -119,6 +119,8 @@ def comparison(expected_array, actual_array, combine, bin_count):
 	def ws_d(cdf1, cdf2):
 		return scipy.stats.wasserstein_distance(cdf1, cdf2)
 
+
+	###### INCORRECT DEFINITION - IGNORE THIS METRIC ########
 	def ks_test(cdf1, cdf2):
 		return scipy.stats.ks_2samp(cdf1, cdf2)
 
@@ -193,7 +195,7 @@ def runMain(gt, pred, outFileFormat, combineLabels, filePattern, singleCSV, outD
 							q3 = np.quantile(combined, 0.75)
 							iqr = q3 - q1
 							bin_width = (2 * iqr) / (len(combined) ** (1 / 3))
-							if bin_width == float(0.0):
+							if bin_width == float(0.0) or np.isnan(bin_width):
 								continue
 							bin_count = np.ceil((combined.max() - combined.min()) / (bin_width))
 						else:
@@ -201,16 +203,14 @@ def runMain(gt, pred, outFileFormat, combineLabels, filePattern, singleCSV, outD
 							q3 = np.quantile(expected_array, 0.75)
 							iqr = q3 - q1
 							bin_width = (2 * iqr) / (len(expected_array) ** (1 / 3))
-							if bin_width == float(0.0):
+							if bin_width == float(0.0) or np.isnan(bin_width):
 								continue
 							bin_count = np.ceil((expected_array.max() - expected_array.min()) / (bin_width))
-						if bin_count > 2**16:
+						if bin_count > 2**16 or np.isnan(bin_count) or bin_count == 0:
 							continue
 						else:
 							bin_count = int(bin_count)
 
-						if bin_count == 0:
-							continue
 						hist_intersect,correlation, chi_square, bhattacharya,l1,l2, linfinity,cosine_d,canberra,ks_divergence,match,cvm,\
 						psi_value, kld_value, jsd_value, wd_value, p_value, errors = comparison(z_gt, z_pred, combineLabels, bin_count)
 
